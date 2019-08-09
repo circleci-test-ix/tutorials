@@ -12,6 +12,7 @@ jobs:
     resource_class: large
     environment:
       MAVEN_OPTS: "-Xmx2048M"
+      JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
     steps:
       - checkout
 #       - restore_cache:
