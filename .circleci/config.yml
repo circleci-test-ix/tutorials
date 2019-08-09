@@ -9,7 +9,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     resource_class: large
     environment:
-      MAVEN_OPTS: "-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit -XX:MaxPermSize=256m"
+      MAVEN_OPTS: "-Xmx1024M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit -XX:MaxPermSize=256m"
     steps:
       - checkout
       - restore_cache:
