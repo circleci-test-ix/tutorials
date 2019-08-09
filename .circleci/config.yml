@@ -3,10 +3,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: store/oracle/serverjre:8
-        auth:
-          username: ryanmdev
-          password: $DOCKERHUB_PASSWORD
+      - image: circleci/openjdk:8-jdk
+#       - image: store/oracle/serverjre:8
+#         auth:
+#           username: ryanmdev
+#           password: $DOCKERHUB_PASSWORD
     resource_class: large
     environment:
       MAVEN_OPTS: "-Xmx2048M"
@@ -17,7 +18,7 @@ jobs:
       - run:
           name: Install Maven
           command: |
-            MAVEN_VERSION=3.5.4
+            MAVEN_VERSION=3.6.1
             curl -O https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
             tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /usr/local
             cd /usr/local
