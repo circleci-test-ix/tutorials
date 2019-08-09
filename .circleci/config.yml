@@ -11,8 +11,8 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     resource_class: large
     environment:
-      MAVEN_OPTS: "-Xmx2048M"
-      JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+#       MAVEN_OPTS: "-Xmx2048M"
+      _JAVA_OPTIONS: "-Xmx3g -XX:+UseG1GC -XX:-UseGCOverheadLimit"
     steps:
       - checkout
 #       - restore_cache:
