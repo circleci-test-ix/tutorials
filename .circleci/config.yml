@@ -19,10 +19,10 @@ jobs:
           name: Install Maven
           command: |
             MAVEN_VERSION=3.6.1
-            curl -O https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
-            tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /usr/local
+            sudo curl -O https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
+            sudo tar xzf apache-maven-${MAVEN_VERSION}-bin.tar.gz -C /usr/local
             cd /usr/local
-            ln -s apache-maven-${MAVEN_VERSION} maven
+            sudo ln -s apache-maven-${MAVEN_VERSION} maven
             cd $HOME
             echo 'export M2_HOME=/usr/local/maven' >> $BASH_ENV
             echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
