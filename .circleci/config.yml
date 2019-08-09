@@ -3,13 +3,13 @@ version: 2.1
 jobs:
   build:
     docker:
-#       - image: maven:3-jdk-8
+      - image: maven:3-jdk-8
 #       - image: circleci/openjdk:8-jdk
-      - image: store/oracle/serverjre:8
-        auth:
-          username: ryanmdev
-          password: $DOCKERHUB_PASSWORD
-    resource_class: large
+#       - image: store/oracle/serverjre:8
+#         auth:
+#           username: ryanmdev
+#           password: $DOCKERHUB_PASSWORD
+#     resource_class: large
     environment:
 #       MAVEN_OPTS: "-Xmx2048M"
       JAVA_TOOLS_OPTIONS: "-Xmx1024m -XX:MaxPermSize=256m"
@@ -30,26 +30,26 @@ jobs:
 #             echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
 #             echo "Java opts:"
 #             echo "$JAVA_OPTS"
-      - run:
-          name: Install Maven
-          command: |
-            yum install -y procps
-            MAVEN_VERSION=3.6.1
-            USER_HOME_DIR="/root"
-            SHA=b4880fb7a3d81edd190a029440cdf17f308621af68475a4fe976296e71ff4a4b546dd6d8a58aaafba334d309cc11e638c52808a4b0e818fc0fd544226d952544
-            BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries            
+#       - run:
+#           name: Install Maven
+#           command: |
+#             yum install -y procps
+#             MAVEN_VERSION=3.6.1
+#             USER_HOME_DIR="/root"
+#             SHA=b4880fb7a3d81edd190a029440cdf17f308621af68475a4fe976296e71ff4a4b546dd6d8a58aaafba334d309cc11e638c52808a4b0e818fc0fd544226d952544
+#             BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries            
             
-            mkdir -p /usr/share/maven /usr/share/maven/ref \
-            && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
-            && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
-            && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
-            && rm -f /tmp/apache-maven.tar.gz \
-            && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+#             mkdir -p /usr/share/maven /usr/share/maven/ref \
+#             && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+#             && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
+#             && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+#             && rm -f /tmp/apache-maven.tar.gz \
+#             && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
             
-            echo 'export M2_HOME=/usr/share/maven' >> $BASH_ENV
-            echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
-            echo "Java opts:"
-            echo "$JAVA_TOOLS_OPTIONS"
+#             echo 'export M2_HOME=/usr/share/maven' >> $BASH_ENV
+#             echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
+#             echo "Java opts:"
+#             echo "$JAVA_TOOLS_OPTIONS"
       - run: mvn clean install
       - run: mvn install -Pdefault-first,default-second -Dgib.enabled=true
       - save_cache:
