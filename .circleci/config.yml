@@ -58,7 +58,7 @@ jobs:
             echo "Java opts:"
             echo "$JAVA_OPTS"
       - run: mvn clean install
-      - run: mvn install -Pdefault-first,default-second -Dgib.enabled=true -Djdk.net.URLClassPath.disableClassPathURLCheck=true
+      - run: mvn install -Pdefault-first,default-second -Dgib.enabled=true -Djdk.net.URLClassPath.disableClassPathURLCheck=true -DuseSystemClassLoader=false
       - save_cache:
           key: cache
           paths:
