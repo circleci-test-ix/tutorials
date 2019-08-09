@@ -24,7 +24,8 @@ jobs:
             cd $HOME
             echo 'export M2_HOME=/usr/local/maven' >> $BASH_ENV
             echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
-      - run: mvn clean install -Pdefault-first,default-second -Dgib.enabled=true
+      - run: mvn clean install
+      - run: mvn install -Pdefault-first,default-second -Dgib.enabled=true
       - save_cache:
           key: cache
           paths:
