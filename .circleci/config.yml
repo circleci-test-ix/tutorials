@@ -9,7 +9,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     resource_class: large
     environment:
-      MAVEN_OPTS: "-Xmx1024M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit -XX:MaxPermSize=256m"
+      MAVEN_OPTS: "-Xmx2048M"
     steps:
       - checkout
       - restore_cache:
@@ -17,14 +17,13 @@ jobs:
       - run:
           name: Install Maven
           command: |
-            curl -O https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
-            tar xzf apache-maven-3.6.1-bin.tar.gz -C /usr/local
+            curl -O https://www-us.apache.org/dist/maven/maven-3/3.5.1/binaries/apache-maven-3.5.1-bin.tar.gz
+            tar xzf apache-maven-3.5.1-bin.tar.gz -C /usr/local
             cd /usr/local
-            ln -s apache-maven-3.6.1 maven
+            ln -s apache-maven-3.5.1 maven
             cd $HOME
             echo 'export M2_HOME=/usr/local/maven' >> $BASH_ENV
             echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
-#       - run: mvn clean install
       - run: mvn clean install -Pdefault-first,default-second -Dgib.enabled=true
       - save_cache:
           key: cache
