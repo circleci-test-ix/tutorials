@@ -19,18 +19,18 @@ jobs:
       - checkout
       - restore_cache:
           key: cache
-#       - run:
-#           name: Install deps
-#           command: |
-#             #
-#             #sudo apt update && sudo apt install openjfx
-#             curl -O https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
-#             tar xzf apache-maven-3.6.1-bin.tar.gz -C /usr/local
-#             cd /usr/local
-#             ln -s apache-maven-3.6.1 maven
-#             cd $HOME
-#             echo 'export M2_HOME=/usr/local/maven' >> $BASH_ENV
-#             echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
+      - run:
+          name: Install deps
+          command: |
+            #
+            #sudo apt update && sudo apt install openjfx
+            curl -O https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+            tar xzf apache-maven-3.6.1-bin.tar.gz -C /usr/local
+            cd /usr/local
+            ln -s apache-maven-3.6.1 maven
+            cd $HOME
+            echo 'export M2_HOME=/usr/local/maven' >> $BASH_ENV
+            echo 'export PATH=${M2_HOME}/bin:${PATH}' >> $BASH_ENV
 #       - run: sudo apt update && sudo apt install openjfx
       - run: mvn clean install
       - run: mvn install -Pdefault-first,default-second -Dgib.enabled=true
