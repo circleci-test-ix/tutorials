@@ -15,7 +15,7 @@ jobs:
       - checkout
       - restore_cache:
           key: cache
-      - run: |
+      - run:
           name: Install deps
           command: |
             #
